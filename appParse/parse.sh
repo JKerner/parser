@@ -1,7 +1,7 @@
 #!/bin/bash
 # My first script
 
-#echo "Hello World you little man!"
+#echo "Hello World!"
 
 ## TODO: not use sudo here, add docker to virtual group maybe? 
 sentence=$@
