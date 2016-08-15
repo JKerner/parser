@@ -2,51 +2,21 @@
 		<head> 
 		<title> Parse McParseface interface</title>
 		
-		<style type="text/css">
-      		div.parserOutput { padding-left: 3em;
-                          padding-top: 1em; padding-bottom: 0px;
-                          margin: 0px; }
-       		.spacingFree { padding: 0px; margin: 0px; }
-       		body {
-				background-color: white;
-				background-repeat: repeat-y;
-				margin-left: 30px;
-				margin-right: 0px;
-				margin-top: 20px;
-				font-family: Lucida Sans, Arial, Helvetica, sans-serif;
-				font-size: 16px;
-				line-height: 20px;
-				}
-
-			p {
-				font-family: Lucida Sans, Arial, Helvetica, sans-serif;
-				font-size: 16px;
-				line-height: 20px;
-				}
-			input.submitForm {padding-left: 1em; padding-right: 1em;
-                         padding-top: 1em; padding-bottom: 1em;
-                         font-size: 16px;
-                         font-family: Lucida Sans, Arial, Helvetica, sans-serif;
-                         margin: 0px; }
-
-            input.sendButton {padding-left: 1em; padding-right: 1em;
-                         padding-top: 1em; padding-bottom: 1em;
-                         font-size: 16px;
-                         font-family: Lucida Sans, Arial, Helvetica, sans-serif;
-                         margin: 0px; }
-			
-    </style>
-
+		
   
 
 		<head>
 		<body>
 			<h1>Parsey McParseface</h1>
-			
+
+			<a href="czech_parser">Czech Parser</a>
+			<br>
+
 		Add sentence that will be parsed <br>	
+		
 		 <form action="index" method="post" name="submit">
 			<p>
-			{{ form.submit(Size=160,class_="submitForm")}}
+			{{ form.submit(Size=100,class_="submitForm")}}
 			
 
 			<input class="sendButton" type="submit" value="send"></p>

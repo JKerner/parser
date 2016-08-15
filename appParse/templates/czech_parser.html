@@ -1,0 +1,30 @@
+<html>
+		<head> 
+		<title> Parse McParseface interface</title>
+		
+		
+    
+  	<link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/test.css')}}" />
+
+		<head>
+		<body>
+			<h1>Syntaxnet - Parser českých vět</h1>
+			<a href="index">English Parser</a>
+			<br>
+		Add sentence that will be parsed <br>	
+		 <form action="czech_parser" method="post" name="submit" accept-charset="utf-8">
+			<p>
+			{{ form.submit(Size=100,class_="submitForm")}}
+			
+
+			<input class="sendButton" type="submit" value="send"></p>
+			
+		</form>
+
+		 <h2>Parse</h2>
+			<div class="parserOutput">
+			<pre id="parse" class="spacingFree">{{ parsedSentence.decode('utf-8') }} </pre>
+			</div>
+		</body>
+	</html>
+
