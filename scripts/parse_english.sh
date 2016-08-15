@@ -2,11 +2,7 @@
 
 # To run on a conll formatted file, add the --conll command line argument.
 
-CDIR=$(readlink -f $(dirname $(readlink -f ${BASH_SOURCE[0]})))
-PDIR=$(readlink -f $(dirname $(readlink -f ${BASH_SOURCE[0]}))/..)
-cd ${PDIR}
-
-SYNTAXNET_HOME=${PDIR}
+SYNTAXNET_HOME=$PWD
 BINDIR=${SYNTAXNET_HOME}/bazel-bin/syntaxnet
 
 PARSER_EVAL=${BINDIR}/parser_eval
