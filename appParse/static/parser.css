@@ -1,31 +1,36 @@
 body {
 	background-color: white;
-	background-image: url(http://nlp.stanford.edu/img/backstripe.gif);
-	background-repeat: repeat-y;
-	margin-left: 30px;
+	margin-left: 40px;
 	margin-right: 0px;
 	margin-top: 0px;
 	font-family: Lucida Sans, Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	line-height: 16px;
+	font-size: 16px;
+	line-height: 21px;
 }
 p {
 	font-family: Lucida Sans, Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	line-height: 16px;
+	font-size: 16px;
+	line-height: 21px;
 }
-p.small {
-	font-size: 10px;
-	line-height: 12px;
+
+button, input, select, textarea {
+  font-family : inherit;
+  font-size   : 100%;
 }
-p.cardinal {
-	color: #8c1515;
+
+form textarea {
+     width: 500px;
+     height: 100px;
+     max-width: 500px;
+     min-width: 500px;
+     max-height: 100px;
+     min-height: 100px;
+     font-size: 16px;
+	 line-height: 21px;
+
 }
-.p {
-	font-family: Lucida Sans, Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	line-height: 16px;
-}
+
+
 span.cardinal {
 	color: #8c1515;
 }
@@ -71,16 +76,16 @@ dl.indent {
 	margin-left: 3em;
 }
 h1 {
-	font-size: 18px;
+	font-size: 22px;
 	font-weight: bold;
-	color: #8c1515;
-	margin-top: 18px;
+	color: #8B008B;
+	margin-top: 20px;
 }
 h2 {
-	font-size: 14px;
+	font-size: 20px;
 	font-weight: bold;
-	color: #8c1515;
-	margin-top: 14px;
+	color: #8B008B;
+	margin-top: 16px;
 }
 h2.green {
 	color: #a40526;

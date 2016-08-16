@@ -13,6 +13,7 @@ from flask import url_for
 from flask import send_from_directory
 
 
+
 from appParse.forms import SubmitForm
 import commands
 import re
@@ -35,16 +36,17 @@ def index():
 	# if there are data in submit form then save the sentence
 	if form.submit.data is not None  and form.validate():
 		sentence = form.submit.data
-		## TODO: add redirect here in order to get the page again with results
+		sentence = parseToSentences(sentence)
+		
 	else:
-		# else add thie default sentence
-		sentence = 'Hello World'
+		# else add this default sentence
+		sentence = 'Hello World.'
 	
 
 	parsedSentence = parseEngSentence(sentence)
-	# result is a tuple, first is return code value, second is parsed string 
 	return render_template('index.html',
 							parsedSentence=parsedSentence,
+							sentence = sentence,
 							form = form )
 
 
@@ -55,7 +57,6 @@ def index():
 def czech_parser():
 
 	print("Parsing czech sentence")
-	# create submit form in index 
 	form = SubmitForm(request.form)
 
 	# if there are data in POST request, then reply with parsed sentence
@@ -65,16 +66,19 @@ def czech_parser():
 	# if there are data in submit form then save the sentence
 	if form.submit.data is not None  and form.validate():
 		sentence = form.submit.data
-		## TODO: add redirect here in order to get the page again with results
+		#take only first sentence if there are more in input
+		sentence = parseToSentences(sentence)
+		
 	else:
 		# else add thie default sentence
 		#sentence = 'Ema má mísu.'
-		sentence = 'Ema má mísu.'
+		sentence = u'Ahoj světe.'
 
 	parsedSentence = parseCzeSentence(sentence)
 	# result is a tuple, first is return code value, second is parsed string 
 	return render_template('czech_parser.html',
 							parsedSentence=parsedSentence,
+							sentence = sentence.encode('utf-8'),
 							form = form )
 
 
@@ -85,9 +89,7 @@ def czech_parser():
 
 
 def parseEngSentence(sentence):
-	""" parses sentence and return input and parsed output"""
-
-	""" parses czech sentence and returns input and parsed output"""
+	""" parses english sentence and returns parsed output in CoNLL format"""
 	bashCommand = "bash ./appParse/parse_eng.sh "+sentence
 	print(bashCommand)
 
@@ -101,7 +103,7 @@ def parseEngSentence(sentence):
 	
 
 def parseCzeSentence(sentence):
-	""" parses czech sentence and returns input and parsed output"""
+	""" parses czech sentence and returns parsed output CoNLL format"""
 	bashCommand = "bash ./appParse/parse_cze.sh "+sentence
 	print(bashCommand)
 
@@ -111,3 +113,11 @@ def parseCzeSentence(sentence):
 	
 	print(result)
 	return result
+
+
+
+def parseToSentences(list_of_sentences):
+	""" If there is more sentences on input, take only the first one"""
+	sentence = re.split("\\.",list_of_sentences)
+	return (sentence[0]+".")
+		

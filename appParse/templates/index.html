@@ -1,31 +1,37 @@
 <html>
 		<head> 
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<title> Parse McParseface interface</title>
 		
-		
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='parser.css') }}" />
   
 
 		<head>
 		<body>
-			<h1>Parsey McParseface</h1>
+			<h1>Syntaxnet - Parsey McParseface</h1>
 
 			<a href="czech_parser">Czech Parser</a>
 			<br>
+		For informations about used POS tags and relations see <a href="http://universaldependencies.org/">Universal Dependencies</a><br>
 
 		Add sentence that will be parsed <br>	
 		
 		 <form action="index" method="post" name="submit">
 			<p>
-			{{ form.submit(Size=100,class_="submitForm")}}
+			{{ form.submit(Size=70,class_="submitForm")}}
 			
 
 			<input class="sendButton" type="submit" value="send"></p>
 			
 		</form>
+		<h2> Input </h2>
+		<div id="parse" class="spacingFree"> {{ sentence.decode('utf-8') }} </div>
 
-		 <h2>Parse</h2>
+		 <h2>Parsed output</h2>
 			<div class="parserOutput">
-			<pre id="parse" class="spacingFree">{{ parsedSentence }} </pre>
+			<pre id="parse" class="spacingFree">{{ parsedSentence.decode('utf-8') }} </pre>
 			</div>
 		</body>
 	</html>
