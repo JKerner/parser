@@ -5,6 +5,6 @@
 
 ## TODO remap to docker 
 sentence=$@
-cd /home/jiri/Documents/workspace/syntaxNet/models/syntaxnet/work
-echo $sentence | bash test.sh
+docker run syntaxnet "sh" "-c" "echo $sentence | bash parse_czech.sh"
+
 

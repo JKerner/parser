@@ -23,19 +23,20 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && apt-get clean
 
 
-RUN wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_czech.sh \
+RUN cd $SYNTAXNETDIR/models/syntaxnet \
+    && echo "cache bust" \
+    && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_czech.sh \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_english.sh \
     && cd $SYNTAXNETDIR/models/syntaxnet/syntaxnet/models \ 
-    && mkdir czech_model \
-    && cd czech_model \
     && git clone https://github.com/jiriker/czech_model.git
 
 WORKDIR $SYNTAXNETDIR/models/syntaxnet
 
-CMD [ "sh", "-c", "echo 'Bob brought the pizza to Alice and they ate it together. It was so delicious.' | . parse_english.sh" ]
+CMD [ "sh", "-c", "echo 'Bob brought the pizza to Alice and they ate it together. It was so delicious.' | bash parse_english.sh" ]
 
 # COMMANDS to build and run
 # ===============================
 # mkdir build && cp Dockerfile build/ && cd build
 # docker build -t syntaxnet .
 # docker run syntaxnet
+
