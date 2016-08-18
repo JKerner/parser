@@ -31,7 +31,7 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && git clone https://github.com/jiriker/czech_model.git
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
-    && echo "cache bust" \
+    && echo "cache busting" \
     && GIT_TRACE=1 git stash \
     && git config http.postBuffer 5000 \ 
     && git clone https://github.com/jiriker/parser.git -b master --progress --verbose
@@ -60,7 +60,8 @@ CMD python server.py
 
 # COMMANDS to build and run
 # ===============================
-# mkdir build && cp Dockerfile build/ && cd build
-# docker build -t syntaxnet .
-# docker run syntaxnet
 
+# docker build -t syntaxnet .
+
+
+#docker run -d -p 5000:5000 -i -t syntaxnet
