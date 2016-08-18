@@ -3,6 +3,7 @@ FROM java:8
 ENV SYNTAXNETDIR=/opt/tensorflow PATH=$PATH:/root/bin
 
 RUN mkdir -p $SYNTAXNETDIR \
+ && echo "cache bust" \
     && cd $SYNTAXNETDIR \
     && apt-get update \
     && apt-get install git zlib1g-dev file swig python2.7 python-dev python-pip -y \
@@ -13,7 +14,8 @@ RUN mkdir -p $SYNTAXNETDIR \
     && wget https://github.com/bazelbuild/bazel/releases/download/0.2.2b/bazel-0.2.2b-installer-linux-x86_64.sh \
     && chmod +x bazel-0.2.2b-installer-linux-x86_64.sh \
     && ./bazel-0.2.2b-installer-linux-x86_64.sh --user \
-    && git clone --recursive https://github.com/tensorflow/models.git \
+    && git config http.postBuffer 5000 \ 
+    && git clone --recursive https://github.com/tensorflow/models.git -b master --progress --verbose \
     && cd $SYNTAXNETDIR/models/syntaxnet/tensorflow \
     && echo "\n\n\n" | ./configure
 
@@ -28,7 +30,8 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_czech.sh \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_english.sh \
     && cd $SYNTAXNETDIR/models/syntaxnet/syntaxnet/models \ 
-    && git clone https://github.com/jiriker/czech_model.git
+    && git config http.postBuffer 5000 \ 
+    && git clone https://github.com/jiriker/czech_model.git -b master --progress --verbose
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && echo "cache busting" \

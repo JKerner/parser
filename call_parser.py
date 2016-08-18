@@ -21,8 +21,8 @@ def call_parser(url, sentence,lang='eng'):
 	return r.text
 
 
-# localhot url for testing, need to be changed to production server URL
-url='http://localhost:5000/'
+# current production server URL
+url='http://cloud.ailao.eu:13880/' 
 
 sentence_eng = "New York is city in America."
 sentence_cze = "Praha je město v České republice."
