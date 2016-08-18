@@ -31,6 +31,7 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && git clone https://github.com/jiriker/czech_model.git
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
+    && echo "cache bust" \
     && GIT_TRACE=1 git stash \
     && git config http.postBuffer 5000 \ 
     && git clone https://github.com/jiriker/parser.git -b master --progress --verbose

@@ -6,5 +6,5 @@
 ## TODO remap to docker 
 sentence=$@
 #docker run syntaxnet "sh" "-c" "echo $sentence | bash parse_czech.sh"
-cd /opt/tensorflow/models/syntaxne
+cd /opt/tensorflow/models/syntaxnet
 echo $sentence | bash parse_czech.sh
