@@ -5,4 +5,5 @@
 
 ## TODO: not use sudo here, add docker to virtual group maybe? 
 sentence=$@
-docker run syntaxnet "sh" "-c" "echo $sentence | bash parse_english.sh"
+#docker run syntaxnet "sh" "-c" "echo $sentence | bash parse_english.sh"
+echo $sentence | bash parse_english.sh

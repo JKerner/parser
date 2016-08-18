@@ -30,9 +30,32 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && cd $SYNTAXNETDIR/models/syntaxnet/syntaxnet/models \ 
     && git clone https://github.com/jiriker/czech_model.git
 
-WORKDIR $SYNTAXNETDIR/models/syntaxnet
+RUN cd $SYNTAXNETDIR/models/syntaxnet \
+    && GIT_TRACE=1 git stash \
+    && git config http.postBuffer 5000 \ 
+    && git clone https://github.com/jiriker/parser.git -b master --progress --verbose
 
-CMD [ "sh", "-c", "echo 'Bob brought the pizza to Alice and they ate it together. It was so delicious.' | bash parse_english.sh" ]
+RUN cd $SYNTAXNETDIR/models/syntaxnet \
+    && pip install cherrypy \
+    && pip install flask \
+    && pip install flask-login \
+    && pip install flask-openid \
+    && pip install flask-mail \
+    && pip install flask-sqlalchemy \ 
+    && pip install sqlalchemy-migrate \
+    && pip install flask-whooshalchemy \
+    && pip install flask-wtf \
+    && pip install flask-babel \
+    && pip install guess_language \
+    && pip install flipflop \ 
+    && pip install coverage 
+   
+
+EXPOSE 5000
+
+WORKDIR $SYNTAXNETDIR/models/syntaxnet/parser
+
+CMD python server.py 
 
 # COMMANDS to build and run
 # ===============================
