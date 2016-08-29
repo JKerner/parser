@@ -13,9 +13,9 @@ RUN mkdir -p $SYNTAXNETDIR \
     && pip install numpy \
     && wget https://github.com/bazelbuild/bazel/releases/download/0.2.2b/bazel-0.2.2b-installer-linux-x86_64.sh \
     && chmod +x bazel-0.2.2b-installer-linux-x86_64.sh \
-    && ./bazel-0.2.2b-installer-linux-x86_64.sh --user \
-    && git config http.postBuffer 5000 \ 
-    && git clone --recursive https://github.com/tensorflow/models.git -b master --progress --verbose \
+    && ./bazel-0.2.2b-installer-linux-x86_64.sh --user 
+
+RUN git clone --recursive https://github.com/tensorflow/models.git  \
     && cd $SYNTAXNETDIR/models/syntaxnet/tensorflow \
     && echo "\n\n\n" | ./configure
 
@@ -24,19 +24,25 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && apt-get autoremove -y \
     && apt-get clean
 
+RUN cd $SYNTAXNETDIR/models/syntaxnet \
+    && mkdir google_czech_model \
+    && wget http://download.tensorflow.org/models/parsey_universal/Czech.zip \
+    && unzip Czech.zip \
+    && cd Czech 
+
+ENV MODEL_DIRECTORY=/opt/tensorflow/models/syntaxnet/google_czech_model/Czech
+
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && echo "cache bust" \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_czech.sh \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_english.sh \
     && cd $SYNTAXNETDIR/models/syntaxnet/syntaxnet/models \ 
-    && git config http.postBuffer 5000 \ 
-    && git clone https://github.com/jiriker/czech_model.git -b master --progress --verbose
+    && git clone https://github.com/jiriker/czech_model.git --progress --verbose
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && echo "cache busting" \
     && GIT_TRACE=1 git stash \
-    && git config http.postBuffer 5000 \ 
     && git clone https://github.com/jiriker/parser.git -b master --progress --verbose
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
