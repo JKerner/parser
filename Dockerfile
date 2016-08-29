@@ -2,8 +2,9 @@ FROM java:8
 
 ENV SYNTAXNETDIR=/opt/tensorflow PATH=$PATH:/root/bin
 
+
 RUN mkdir -p $SYNTAXNETDIR \
- && echo "cache bust" \
+    && echo "Installing dependencies for Syntaxnet and Tensorflow" \
     && cd $SYNTAXNETDIR \
     && apt-get update \
     && apt-get install git zlib1g-dev file swig python2.7 python-dev python-pip -y \
@@ -15,16 +16,21 @@ RUN mkdir -p $SYNTAXNETDIR \
     && chmod +x bazel-0.2.2b-installer-linux-x86_64.sh \
     && ./bazel-0.2.2b-installer-linux-x86_64.sh --user 
 
-RUN git clone --recursive https://github.com/tensorflow/models.git  \
-    && cd $SYNTAXNETDIR/models/syntaxnet/tensorflow \
+RUN echo "Clone tensorflow with models." \ 
+    && git clone --recursive https://github.com/tensorflow/models.git  
+
+RUN cd $SYNTAXNETDIR/models/syntaxnet/tensorflow \
+    && echo "configure tensorflow before building." \
     && echo "\n\n\n" | ./configure
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
+    && echo "Test build with bazel" \
     && bazel test --genrule_strategy=standalone syntaxnet/... util/utf8/... \
     && apt-get autoremove -y \
     && apt-get clean
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
+    && echo "Donwload and unzip czech model trained by google." \
     && mkdir google_czech_model \
     && wget http://download.tensorflow.org/models/parsey_universal/Czech.zip \
     && unzip Czech.zip \
@@ -34,18 +40,19 @@ ENV MODEL_DIRECTORY=/opt/tensorflow/models/syntaxnet/google_czech_model/Czech
 
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
-    && echo "cache bust" \
+    && echo "Copy scripts for model calling and download czech model trained in Metacentrum." \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_czech.sh \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_english.sh \
     && cd $SYNTAXNETDIR/models/syntaxnet/syntaxnet/models \ 
     && git clone https://github.com/jiriker/czech_model.git --progress --verbose
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
-    && echo "cache busting" \
+    && echo "Download web app in Flask." \
     && GIT_TRACE=1 git stash \
     && git clone https://github.com/jiriker/parser.git -b master --progress --verbose
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
+    && echo "Install all dependecies for web app. " \
     && pip install cherrypy \
     && pip install flask \
     && pip install flask-login \
