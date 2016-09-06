@@ -16,12 +16,15 @@ RUN mkdir -p $SYNTAXNETDIR \
     && chmod +x bazel-0.2.2b-installer-linux-x86_64.sh \
     && ./bazel-0.2.2b-installer-linux-x86_64.sh --user 
 
-RUN echo "Clone tensorflow with models." \ 
+RUN cd $SYNTAXNETDIR \ 
+    && echo "Clone tensorflow with models  !cache!." \ 
     && git clone --recursive https://github.com/tensorflow/models.git  
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet/tensorflow \
     && echo "configure tensorflow before building." \
     && echo "\n\n\n" | ./configure
+
+    
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && echo "Test build with bazel" \
@@ -78,6 +81,5 @@ CMD python server.py
 # ===============================
 
 # docker build -t syntaxnet .
-
 
 #docker run -d -p 5000:5000 -i -t syntaxnet

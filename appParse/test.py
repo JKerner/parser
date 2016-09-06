@@ -14,4 +14,4 @@ def parseToSentences(list_of_sentences):
 		print sentence[i]
 
 
-parseToSentences("List. Fuck. Love is all.")
+parseToSentences("List. Day is all sunny.")
