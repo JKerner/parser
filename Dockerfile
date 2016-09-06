@@ -35,6 +35,7 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && echo "Donwload and unzip czech model trained by google." \
     && mkdir google_czech_model \
+    && cd google_czech_model \ 
     && wget http://download.tensorflow.org/models/parsey_universal/Czech.zip \
     && unzip Czech.zip \
     && cd Czech 
