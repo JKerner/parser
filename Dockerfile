@@ -48,12 +48,11 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_czech.sh \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_english.sh \
     && cd $SYNTAXNETDIR/models/syntaxnet/syntaxnet/models \ 
-    && git clone https://github.com/jiriker/czech_model.git --progress --verbose
+#    && git clone https://github.com/jiriker/czech_model.git --progress --verbose
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && echo "Download web app in Flask." \
-    && GIT_TRACE=1 git stash \
-    && git clone https://github.com/jiriker/parser.git -b master --progress --verbose
+    && git clone https://github.com/jiriker/parser.git --progress --verbose
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && echo "Install all dependecies for web app. " \
@@ -83,4 +82,4 @@ CMD python server.py
 
 # docker build -t syntaxnet .
 
-#docker run -d -p 5000:5000 -i -t syntaxnet
+# docker run -d -p 5000:5000 -i -t syntaxnet

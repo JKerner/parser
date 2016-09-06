@@ -74,6 +74,8 @@ def czech_parser():
 		#sentence = 'Ema má mísu.'
 		sentence = u'Ahoj světe.'
 
+	
+	
 	parsedSentence = parseCzeSentence(sentence)
 	# result is a tuple, first is return code value, second is parsed string 
 	return render_template('czech_parser.html',
@@ -116,8 +118,16 @@ def parseCzeSentence(sentence):
 
 
 
-def parseToSentences(list_of_sentences):
-	""" If there is more sentences on input, take only the first one"""
-	sentence = re.split("\\.",list_of_sentences)
-	return (sentence[0]+".")
-		
+def parseToSentences(input_string):
+	""" Split at the end of the line"""
+	sentence = re.split("\\.",input_string)
+	
+
+	""""sentence = input_string.split('\n')
+	for s in sentence:
+		print s
+	return sentence"""
+
+	return (sentence[0]+" .")
+
+	
