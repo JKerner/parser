@@ -16,11 +16,11 @@ All logic is placed in file views.py.
 For description of CoNLL-U see http://universaldependencies.org/format.html
 
 Output of Parsey McParseface
-
+'''
 1	Hello	_	X	UH	_	0	ROOT	_	_
 2	World	_	NOUN	NNP	_	1	dep	_	_
 3	.	_	.	.	_	1	punct	_	_
-
+'''
 Output of Czech parser 
 
 1	Ahoj	_	NOUN	NNIS4-----A----	Animacy=Inan|Case=Nom|Gender=Masc|Negative=Pos|Number=Sing|fPOS=NOUN++NNIS1-----A----	2	dobj	_	_
