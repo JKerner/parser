@@ -1,5 +1,6 @@
 # Web service for parser of Czech sentences
 Web service is available at http://cloud.ailao.eu:4570/index
+All information about Syntaxnet and Czech model from Google can be found here https://github.com/tensorflow/models/tree/master/syntaxnet
 
 Simple web interface is build with python framework Flask. Cherrypy server is used. Only one request is services at the time. 
 # How to use
