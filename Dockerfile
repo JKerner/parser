@@ -47,7 +47,7 @@ RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && echo "Copy scripts for model calling and download czech model trained in Metacentrum." \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_czech.sh \
     && wget https://raw.githubusercontent.com/jiriker/parser/master/scripts/parse_english.sh \
-    && cd $SYNTAXNETDIR/models/syntaxnet/syntaxnet/models \ 
+    && cd $SYNTAXNETDIR/models/syntaxnet/syntaxnet/models  
 #    && git clone https://github.com/jiriker/czech_model.git --progress --verbose
 
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
